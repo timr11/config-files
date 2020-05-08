@@ -1,0 +1,5 @@
+!/static/vim/.vim
+/static/vim/.vim/*
+!/static/vim/.vim/bundle
+/static/vim/.vim/bundle/*
+!/static/vim/.vim/bundle/Vundle.vim
