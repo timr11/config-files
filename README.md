@@ -5,4 +5,4 @@ Contains my config files mainly for Linux, including:
   * taskwarrior
   * zsh
   
-Also contains setup scripts to install these config files and my favourite Linux programs.
+Also contains setup scripts to install these config files and linux programs I typically install on a fresh box (debian).
