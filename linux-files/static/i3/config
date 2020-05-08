@@ -1,0 +1,330 @@
+# i3 config file (v4)
+# by Epsiarto Rizqi Nurwijayadi Sayidina
+#
+# Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+#
+# For a ceerious i3 config, you can read:
+#   https://github.com/andreatta/config/blob/master/i3/config
+#
+
+set $mod Mod4
+set $alt Mod1
+
+font pango:monospace 10
+# font pango:DejaVu Sans Mono 8
+# font pango:Terminus 11px
+# font pango:FontAwesome 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+# bindsym $mod+Return exec i3-sensible-terminal
+# bindsym Mod1+Return exec xfce4-terminal
+bindsym $mod+Return exec qterminal
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+$alt+d exec dmenu_run
+bindsym $mod+Shift+d exec rofi -show run -opacity 90
+
+# list open windows to switch to
+bindsym $mod+Tab exec rofi -show window -opacity 90
+
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+g split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# workspace variable
+# 1:  term, 2:  net, 3:  images, 4:  music, 5: mail
+set $ws01 "1:  term"
+set $ws02 "2:  net"
+set $ws03 "3:  images"
+set $ws04 "4:  music"
+set $ws05 "5:  pdfs"
+set $ws06 "6:  film"
+set $ws07 "7:  torrents"
+set $ws08 "8:  VMs"
+set $ws09 "九 kyū"
+set $ws10 "10:  spotify"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws01
+bindsym $mod+2 workspace $ws02
+bindsym $mod+3 workspace $ws03
+bindsym $mod+4 workspace $ws04
+bindsym $mod+5 workspace $ws05
+bindsym $mod+6 workspace $ws06
+bindsym $mod+7 workspace $ws07
+bindsym $mod+8 workspace $ws08
+bindsym $mod+9 workspace $ws09
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws01
+bindsym $mod+Shift+2 move container to workspace $ws02
+bindsym $mod+Shift+3 move container to workspace $ws03
+bindsym $mod+Shift+4 move container to workspace $ws04
+bindsym $mod+Shift+5 move container to workspace $ws05
+bindsym $mod+Shift+6 move container to workspace $ws06
+bindsym $mod+Shift+7 move container to workspace $ws07
+bindsym $mod+Shift+8 move container to workspace $ws08
+bindsym $mod+Shift+9 move container to workspace $ws09
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        bindsym h resize grow width 10 px or 10 ppt
+        bindsym j resize shrink height 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize grow width 10 px or 10 ppt
+        bindsym Down resize shrink height 10 px or 10 ppt
+        bindsym Up resize grow height 10 px or 10 ppt
+        bindsym Right resize shrink width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+set $Locker "$CONFIG_FILES/linux-files/scripts/lock.sh 0"
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"  
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+Pause mode "$mode_system"
+
+bindsym $mod+Mod1+z exec "i3-nagbar -t warning -m 'Edit system files' -b 'config' 'vim ~/.config/i3/config'"
+
+# Window Colours
+# class                 border   backgr.  text     indicator
+client.unfocused        #5c5dad  #5c5dad  #ffffff  #fcc09e
+client.focused_inactive #222222  #222222  #999999  #fcc09e
+client.focused          #c9c925  #c9c925  #000000  #fcc09e
+client.urgent           #a5a5a5  #a5a5a5  #2e3436  #fcc09e
+client.background       #161616
+
+# workspace_layout tabbed
+
+# i3 gaps
+#for_window [class="^.*"] border pixel 3
+new_window pixel 3
+
+# Gaps
+gaps inner 20
+gaps outer 5
+smart_gaps on
+smart_borders on
+
+# Examples
+# gaps inner all set 20
+# gaps outer current plus 5
+
+
+# ws: term
+# assign [class="URxvt"] $ws01
+# ws: net (Firefox)
+assign [instance="Navigator"] $ws02
+for_window [instance="Navigator"] move container to workspace $ws02
+# ws: images
+assign [instance="nomacs"] $ws03
+# ws: music
+assign [class="audacity"] $ws04
+for_window [instance="audacity"] move container to workspace $ws04
+# ws: pdfs
+assign [instance="mupdf"] $ws05
+for_window [instance="mupdf"] move container to workspace $ws05
+assign [instance="evince"] $ws05
+for_window [instance="evince"] move container to workspace $ws05
+assign [class="at-laborg-briss-Briss"] $ws05
+for_window [class="at-laborg-briss-Briss"] move container to workspace $ws05
+assign [class="Simple-scan"] $ws05
+for_window [class="Simple-scan"] move container to workspace $ws05
+# ws: film
+assign [class="vlc"] $ws06
+for_window [instance="vlc"] move container to workspace $ws06
+# ws: torrents
+assign [class="deluge"] $ws07
+for_window [instance="deluge"] move container to workspace $ws07
+# ws: VMs
+assign [class="VirtualBox Machine"] $ws08
+for_window [instance="VirtualBox Machine"] move container to workspace $ws08
+assign [class="VirtualBox Manager"] $ws08
+for_window [instance="VirtualBox Manager"] move container to workspace $ws08
+# ws: spotify
+assign [class="Spotify"] $ws10
+for_window [instance="spotify"] move container to workspace $ws10
+
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+
+# default i3 status config
+#  status_command i3status
+
+# custom i3 status config
+#    status_command i3status --config ~/.config/i3/i3status/custom.conf
+
+# i3blocks
+#   status_command i3blocks -c ~/.config/i3/i3blocks/custom.conf
+
+# i3bar, old pre-v1.10 plain conky onfiguration
+#     status_command conky -c ~/.config/i3/conky/01.old/conkyrc
+
+# i3bar, v.1.10 conky lua configuration
+#     status_command conky -c ~/.config/i3/conky/02.lua/conkyrc.lua
+
+# i3bar, v.1.10 conky lua with json configuration
+#    status_command ~/.config/i3/conky/03.json/json.sh
+
+# i3bar, modularized lua json configuration
+    status_command ~/.config/i3/conky/04.modular/json.bottom.sh
+
+#   height of the bar in pixels
+    height         25
+#   separator_symbol ""
+#   font           pango:Consolas 9
+    id             bottom-bar
+    i3bar_command  i3bar -t
+    position       bottom
+
+#   mode         hide
+#   hidden_state hide
+#   modifier     Mod1
+
+    colors {
+        background #ffffff80
+        statusline #5c5dad
+        separator  #000000
+
+        # class            border    backgrd   text
+        focused_workspace  #cccccc   #c9c925   #000000
+        active_workspace   #cccccc   #aaaaaa   #000000
+        inactive_workspace #cccccc   #ffffff   #5c5dad
+        urgent_workspace   #cccccc   #ad3737   #ffffff
+    }
+}
+
+# secondary bar
+bar {
+# i3bar, modularized lua json configuration
+    status_command ~/.config/i3/conky/04.modular/json.top.sh
+
+    height         25
+    id             top-bar
+    i3bar_command  i3bar -t
+    position       top
+    workspace_buttons      no
+
+    colors {
+        background #ffffff80
+        statusline #5c5dad
+        separator  #000000
+
+        # class            border    backgrd   text
+        focused_workspace  #cccccc   #c9c925   #000000
+        active_workspace   #cccccc   #aaaaaa   #000000
+        inactive_workspace #cccccc   #ffffff   #5c5dad
+        urgent_workspace   #cccccc   #ad3737   #ffffff
+    }
+
+}
+
+exec --no-startup-id compton
+exec --no-startup-id dunst
+exec --no-startup-id dropbox start
+exec --no-startup-id expressvpn connect
+exec --no-startup-id firefox
+exec --no-startup-id nm-applet
+exec --no-startup-id snap run spotify
+exec --no-startup-id qterminal
+
+# Setup displays (if HDMI, only HDMI, otherwise only eDP1)
+exec_always --no-startup-id $CONFIG_FILES/linux-files/scripts/setup/setup_display.sh
+exec_always --no-startup-id feh --bg-scale $HOME/Pictures/backgrounds/background.jpg
+
+# Screenshots
+bindsym --release $mod+Print exec scrot -q 100 -s '%Y-%m-%d_%H:%M_$wx$h.png' -e 'mv $f ~/Pictures/screenshots/ && nomacs ~/Pictures/screenshots/$f'
+bindsym --release Print exec scrot -q 100 '%Y-%m-%d_%H:%M_$wx$h.png' -e 'mv $f ~/Pictures/screenshots/ && nomacs ~/Pictures/screenshots/$f'
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle # mute sound
