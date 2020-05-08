@@ -96,7 +96,7 @@ set $ws05 "5:  pdfs"
 set $ws06 "6:  film"
 set $ws07 "7:  torrents"
 set $ws08 "8:  VMs"
-set $ws09 "九 kyū"
+set $ws09 "9:  messages"
 set $ws10 "10:  spotify"
 
 # switch to workspace
@@ -227,6 +227,9 @@ assign [class="VirtualBox Machine"] $ws08
 for_window [instance="VirtualBox Machine"] move container to workspace $ws08
 assign [class="VirtualBox Manager"] $ws08
 for_window [instance="VirtualBox Manager"] move container to workspace $ws08
+# ws: messages
+assign [class="slack"] $ws09
+for_window [instance="slack"] move container to workspace $ws09
 # ws: spotify
 assign [class="Spotify"] $ws10
 for_window [instance="spotify"] move container to workspace $ws10
