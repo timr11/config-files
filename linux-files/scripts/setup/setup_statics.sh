@@ -8,3 +8,5 @@ $LINUX_SETUP_SCRIPTS_DIR/setup_i3.sh
 $LINUX_SETUP_SCRIPTS_DIR/setup_zsh.sh
 $LINUX_SETUP_SCRIPTS_DIR/setup_vim.sh
 
+cp $CONFIG_FILES/static/.prettierrc $HOME/
+

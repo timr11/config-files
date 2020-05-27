@@ -36,21 +36,15 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'sbdchd/neoformat'
 Plugin 'yuezk/vim-js'
 Plugin 'maxmellon/vim-jsx-pretty'
+Plugin 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'css', 'scss'] }
 
 call vundle#end()
 
-let g:neoformat_try_formatprg=1
-
-augroup NeoformatAutoFormat
-    autocmd!
-    autocmd FileType javascript,javascript.jsx,javascriptreact setlocal formatprg=prettier\
-        \--stdin\
-        \--use-tabs\
-        \--print-width\ 80\
-        \--single-quote\
-        \--trailing-comma\ es5
-    autocmd BufWritePre *.js,*.jsx Neoformat
-augroup END
+" let g:prettier#exec_cmd_path="$CONFIG_FILES/static/"
+let g:prettier#autoformat_config_present=1
+let g:prettier#autoformat_config_files = [".prettierrc"]
+" let g:prettier#config#use_tabs='true'
+autocmd BufWritePre *.js,*.jsx,*.css,*.scss PrettierAsync
 
 " Cool function I found that closes NERDTree if the last open
 " window is closed.
@@ -120,9 +114,12 @@ au BufNewFile,BufRead *.c,*.h,*.cpp
     \ set shiftround
 
 au BufNewFile,BufRead *.js,*.html,*.css
-    \ set tabstop=2     |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2
+    \ set autoindent    |
+    \ set noexpandtab   |
+    \ set tabstop=4     |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4  |
+    \ set shiftround
 
 au BufNewFile,BufRead *.java
     \ set autoindent    |
