@@ -37,6 +37,7 @@ Plugin 'sbdchd/neoformat'
 Plugin 'yuezk/vim-js'
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'css', 'scss'] }
+Plugin 'martinda/Jenkinsfile-vim-syntax'
 
 call vundle#end()
 
