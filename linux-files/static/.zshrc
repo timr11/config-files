@@ -105,6 +105,18 @@ export LINUX_SCRIPTS_DIR="$LINUX_CONFIG_FILES/scripts"
 export LINUX_SETUP_SCRIPTS_DIR="$LINUX_SCRIPTS_DIR/setup"
 export BLACKCAT="/blackcat"
 export CURRENT_TERM="term-4a"
+export AM_GH="$BLACKCAT/github/project-airmatrix"
+
+export RES_API_URL="http://localhost:3002/api/"
+export RES_DB_URL="tutorial-db-instance2.c6jlhcc2njk8.us-east-2.rds.amazonaws.com"
+export RES_DB_USER="master"
+export RES_DB_PASSWORD="airmatrix"
+export RES_DB_SCHEMA="toronto"
+
+
+ssh-add ~/.ssh/id_rsa &> /dev/null
+ssh-add ~/.ssh/airmatrix_rsa &> /dev/null
+
 
 alias g++14="g++ -std=c++14 -Wall -g"
 alias briss='setsid java -jar ~/Downloads/Programs/briss-0.9/briss-0.9.jar'
@@ -122,7 +134,33 @@ alias sssh='ssh tromansk@linux.student.cs.uwaterloo.ca'
 alias simple-scan='setsid simple-scan > /dev/null 2>&1'
 alias topdirs='sudo du -h --max-depth=1 | sort -hr | head'
 alias updatestatics="$LINUX_SETUP_SCRIPTS_DIR/setup_statics.sh"
-alias lowtemp="setsid redshift -b 0.3:0.3 -P -O 4500K"
+alias editzrc="vim $LINUX_CONFIG_FILES/static/.zshrc"
+alias editvim="vim $CONFIG_FILES/static/vim/vimrc.vim"
+alias editi3="vim $LINUX_CONFIG_FILES/static/i3/config"
+alias zrc="source $HOME/.zshrc"
+
+function lowtemp {
+    setsid redshift -b "$1:$1" -P -O 4500K > /dev/null 2>&1
+}
+
+alias am="cd $AM_GH"
+alias ams="cd $AM_GH/airmatrix-server"
+alias amwao="cd $AM_GH/webapp-operator"
+alias amwat="cd $AM_GH/webapp-traffic-manager"
+alias amdr="cd $AM_GH/drone-communications-service"
+alias amrs="cd $AM_GH/airmatrix-routing-server"
+alias amdoc="cd $BLACKCAT/documents/airmatrix-docs"
+alias ammysql="mysql -h $RES_DB_URL -P 3306 -u master -p"
+#alias amtest="$HOME/Documents/SDKs/Firmware/setLat_Lng.sh 43.6582262 -79.3982735"
+alias amtest="$HOME/Documents/SDKs/Firmware/setLat_Lng.sh 43.6583 -79.3983"
+alias amxrd="cd $AM_GH/xrd-proxy"
+alias aws-docker-auth="aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 904593771304.dkr.ecr.us-east-2.amazonaws.com"
+alias aws-psql="psql -d airmatrix -U airmatrix -h airmatrix-db-pg.c6jlhcc2njk8.us-east-2.rds.amazonaws.com"
+
+alias aws-dcs="ssh -A ec2-user@ec2-18-189-145-225.us-east-2.compute.amazonaws.com"
+alias aws-bastion="ssh -A ubuntu@ec2-18-222-113-3.us-east-2.compute.amazonaws.com"
+alias aws-k8s-master="ssh -A admin@ec2-18-188-215-240.us-east-2.compute.amazonaws.com"
+alias aws-jenkins="ssh -A ubuntu@ec2-18-217-219-70.us-east-2.compute.amazonaws.com"
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
 export PATH=$HOME/sys161/bin:$HOME/sys161/tools/bin:$PATH
@@ -130,6 +168,7 @@ export PATH=$PATH:$HOME/anaconda3/bin
 export PATH=$PATH:$JAVA_HOME/bin
 export PATH=$PATH:$HOME/Downloads/programs/apache-maven-3.6.3/bin
 export PATH=$PATH:$LINUX_SCRIPTS_DIR
+export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
 
 alias linuxconfig="cd $LINUX_CONFIG_FILES"
 
