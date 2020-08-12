@@ -114,7 +114,7 @@ au BufNewFile,BufRead *.c,*.h,*.cpp
     \ set shiftwidth=4  |
     \ set shiftround
 
-au BufNewFile,BufRead *.js,*.html,*.css
+au BufNewFile,BufRead *.js,*.jsx,*.html,*.css
     \ set autoindent    |
     \ set noexpandtab   |
     \ set tabstop=4     |
@@ -136,6 +136,8 @@ au BufNewFile,BufRead *.hs
     \ set shiftwidth=4  |             "An indent is 4 spaces
     \ set shiftround                  "Round indent to nearest shiftwidth multiple
 
+au BufNewFile,BufRead Jenkinsfile setf groovy
+
 if has('gui_running')
     set background=dark
     colorscheme solarized
@@ -146,11 +148,12 @@ endif
 let NERDTree=['\.pyc$'. '\~$'] "ignore files in NERDTree
 
 " Tab specific option
-set tabstop=2                   "A tab is 8 spaces
-set expandtab                   "Always uses spaces instead of tabs
-set softtabstop=2               "Insert 4 spaces when tab is pressed
-set shiftwidth=2                "An indent is 4 spaces
+set tabstop=4                   "A tab is 8 spaces
+set noexpandtab                 "Use tabs
+set softtabstop=4               "Insert 4 spaces when tab is pressed
+set shiftwidth=4                "An indent is 4 spaces
 set shiftround                  "Round indent to nearest shiftwidth multiple
+set smartindent
 
 
 map <f9> :make
