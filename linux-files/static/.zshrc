@@ -107,16 +107,8 @@ export BLACKCAT="/blackcat"
 export CURRENT_TERM="term-4a"
 export AM_GH="$BLACKCAT/github/project-airmatrix"
 
-export RES_API_URL="http://localhost:3002/api/"
-export RES_DB_URL="tutorial-db-instance2.c6jlhcc2njk8.us-east-2.rds.amazonaws.com"
-export RES_DB_USER="master"
-export RES_DB_PASSWORD="airmatrix"
-export RES_DB_SCHEMA="toronto"
-
-
 ssh-add ~/.ssh/id_rsa &> /dev/null
 ssh-add ~/.ssh/airmatrix_rsa &> /dev/null
-
 
 alias g++14="g++ -std=c++14 -Wall -g"
 alias briss='setsid java -jar ~/Downloads/Programs/briss-0.9/briss-0.9.jar'
@@ -143,12 +135,18 @@ function lowtemp {
     setsid redshift -b "$1:$1" -P -O 4500K > /dev/null 2>&1
 }
 
+function pushecr {
+  docker build --network=host -t "$1" .
+  docker tag "$1" ${ECR_URL}/"$1"
+  docker push ${ECR_URL}/"$1"
+}
+
 alias am="cd $AM_GH"
 alias ams="cd $AM_GH/airmatrix-server"
 alias amwao="cd $AM_GH/webapp-operator"
 alias amwat="cd $AM_GH/webapp-traffic-manager"
 alias amdr="cd $AM_GH/drone-communications-service"
-alias amrs="cd $AM_GH/airmatrix-routing-server"
+alias amrs="cd $AM_GH/airmatrix-routing-server > /dev/null 2>&1 || cd $AM_GH/routing-service-2"
 alias amdoc="cd $BLACKCAT/documents/airmatrix-docs"
 alias ammysql="mysql -h $RES_DB_URL -P 3306 -u master -p"
 #alias amtest="$HOME/Documents/SDKs/Firmware/setLat_Lng.sh 43.6582262 -79.3982735"
