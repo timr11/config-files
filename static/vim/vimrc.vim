@@ -165,6 +165,12 @@ let g:airline_theme='luna'
 set t_Co=256
 
 set list          " Display unprintable characters f12 - switches
-set listchars=tab:•\ ,trail:•,extends:»,precedes:« " Unprintable chars mapping
+set listchars=tab:\ \ ,trail:•,extends:»,precedes:« " Unprintable chars mapping
 nnoremap <silent> <F5> :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 set pastetoggle=<F3>
+
+" Markdown preview options
+let vim_markdown_preview_toggle=1 " Use hotkey to render the markdown file
+let vim_markdown_preview_hotkey='<C-m>'
+let vim_markdown_preview_browser='Firefox'
+let vim_markdown_preview_temp_file=1 " Delete temp .html file after closing browser
