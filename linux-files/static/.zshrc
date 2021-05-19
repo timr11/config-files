@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/sbin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/usr/bin:/bin:/sbin:$HOME/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -99,12 +99,12 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
-export CONFIG_FILES="/home/config-files"
-export LINUX_CONFIG_FILES="$CONFIG_FILES/linux-files"
+export TIMS_CONFIG_FILES="/home/config-files"
+export LINUX_CONFIG_FILES="$TIMS_CONFIG_FILES/linux-files"
 export LINUX_SCRIPTS_DIR="$LINUX_CONFIG_FILES/scripts"
 export LINUX_SETUP_SCRIPTS_DIR="$LINUX_SCRIPTS_DIR/setup"
 export BLACKCAT="/blackcat"
-export CURRENT_TERM="term-4a"
+export CURRENT_TERM="term-5a"
 export AM_GH="$BLACKCAT/github/project-airmatrix"
 
 ssh-add ~/.ssh/id_rsa &> /dev/null
@@ -127,7 +127,7 @@ alias simple-scan='setsid simple-scan > /dev/null 2>&1'
 alias topdirs='sudo du -h --max-depth=1 | sort -hr | head'
 alias updatestatics="$LINUX_SETUP_SCRIPTS_DIR/setup_statics.sh"
 alias editzrc="vim $LINUX_CONFIG_FILES/static/.zshrc"
-alias editvim="vim $CONFIG_FILES/static/vim/vimrc.vim"
+alias editvim="vim $TIMS_CONFIG_FILES/static/vim/vimrc.vim"
 alias editi3="vim $LINUX_CONFIG_FILES/static/i3/config"
 alias zrc="source $HOME/.zshrc"
 
@@ -167,6 +167,10 @@ export PATH=$PATH:$JAVA_HOME/bin
 export PATH=$PATH:$HOME/Downloads/programs/apache-maven-3.6.3/bin
 export PATH=$PATH:$LINUX_SCRIPTS_DIR
 export PATH=$PATH:/home/linuxbrew/.linuxbrew/bin
+export CROSS_COMPILE=$HOME/Downloads/programs/gcc-linaro-7.5.0-2019.12-i686_aarch64-linux-gnu/bin/aarch64-linux-gnu-
+# export CROSS_COMPILE=/home/timr11/Downloads/programs/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-
 
 alias linuxconfig="cd $LINUX_CONFIG_FILES"
+
+alias sshdatasci="ssh -D 1080 tromansk@datasci.cs.uwaterloo.ca"
 

@@ -14,7 +14,7 @@ set clipboard=unnamedplus
 set encoding=utf-8
 
 " Setup Vundle
-set rtp+=$CONFIG_FILES/static/vim/.vim/bundle/Vundle.vim
+set rtp+=$TIMS_CONFIG_FILES/static/vim/.vim/bundle/Vundle.vim
 call vundle#begin() " Vundle will install anything between this and line 34
 
 Plugin 'gmarik/Vundle.vim'
@@ -38,10 +38,11 @@ Plugin 'yuezk/vim-js'
 Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'css', 'scss'] }
 Plugin 'martinda/Jenkinsfile-vim-syntax'
+Plugin 'JamshedVesuna/vim-markdown-preview'
 
 call vundle#end()
 
-" let g:prettier#exec_cmd_path="$CONFIG_FILES/static/"
+" let g:prettier#exec_cmd_path="$TIMS_CONFIG_FILES/static/"
 let g:prettier#autoformat_config_present=1
 let g:prettier#autoformat_config_files = [".prettierrc"]
 " let g:prettier#config#use_tabs='true'
